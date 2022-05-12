@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             }
 
 
+
                             dropdawn.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, Fruitnames));
 
                         }catch (JSONException e){
