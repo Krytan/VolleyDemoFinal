@@ -1,7 +1,12 @@
 package com.example.volleydemo;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
     private Spinner dropdawn;
+    private TextView txt;
     private ArrayList<String> Fruitnames;
-
+    private ActivityResultLauncher<Intent> launcher;
+    boolean CheckFirstTime = true;
+    private int test = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +49,30 @@ public class MainActivity extends AppCompatActivity {
 
         Fruitnames = new ArrayList<>();
         Fruitname = findViewById(R.id.fruitname);
-        dropdawn = (Spinner)findViewById(R.id.dropdown_menu);
+        dropdawn = findViewById(R.id.dropdown_menu);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
+        txt = findViewById(R.id.normaltxt);
+
+
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode() == AppConstants.RESULT_CODE_SECOND) {
+                            Intent intent = result.getData();
+                            //txt_msg.setText(intent.getStringExtra("msg"));
+                            Toast.makeText(MainActivity.this, intent.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        if(result.getResultCode() == AppConstants.RESULT_CODE_THIRD) {
+                            //txt_msg.setText(result.getData().getStringExtra("msg"));
+                            Toast.makeText(MainActivity.this, "*******", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                });
 
 
 
@@ -52,14 +81,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String country=   dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
-                Toast.makeText(getApplicationContext(),country,Toast.LENGTH_LONG).show();
+
+
+
+                    String name = dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
+                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                    intent.putExtra("fromMain", name);
+                    launcher.launch(intent);
+                    //Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
+
+
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                // DO Nothing here
+
+
             }
         });
 
@@ -87,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
+
                 }
 
                 @Override
@@ -99,12 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+            CheckFirstTime = false;
 
         });
 
 
 
         btn2.setOnClickListener( v->{
+
             String fruitName = Fruitname.getText().toString();
             DataService dataService = new DataService(this);
             dataService.getFruit(fruitName, new DataListener() {
@@ -123,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
                     try {
                         String data = jsonObject.getString("genus") + " " + jsonObject.getString("name");
-                        //dropdawn.setText(data);
+                        txt.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

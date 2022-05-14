@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public interface DataListener {
-    public void onDataReady(JSONArray jsonArray);
-    public void onDataError(String err);
-    public void onDataReady(JSONObject jsonObject);
+     void onDataReady(JSONArray jsonArray);
+     void onDataError(String err);
+     void onDataReady(JSONObject jsonObject);
 }
