@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-
                     String name = dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     intent.putExtra("fromMain", name);
@@ -132,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataError(String err) {
 
                 }
+
 
                 @Override
                 public void onDataReady(JSONObject jsonObject) {

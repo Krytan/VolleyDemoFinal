@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2"
-    android:background="@drawable/wholesome">
+    android:background="@drawable/wholesome"
+    tools:context=".MainActivity2">
 
     <Button
         android:id="@+id/btnback"
@@ -44,15 +44,6 @@
             android:textStyle="bold"
 
             ></TextView>
-
-
-
-
-
-
-
-
-
 
         </androidx.cardview.widget.CardView>
 
