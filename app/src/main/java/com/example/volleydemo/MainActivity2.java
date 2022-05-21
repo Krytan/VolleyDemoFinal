@@ -39,9 +39,6 @@ public class MainActivity2 extends AppCompatActivity {
             intent.putExtra("msg","to main from second");
             setResult(AppConstants.RESULT_CODE_SECOND, intent);
             finish();
-
-
-
         });
 
     }
@@ -63,7 +60,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void onDataReady(JSONObject jsonObject) {
 
                 try {
-                    String data = "Name: "+ jsonObject.getString("name") + "\nGenus: " + jsonObject.getString("genus") + "\nFamily: " + jsonObject.getString("family");
+                    String data = "Name: "+ jsonObject.getString("firstName") + "\nGenus: " + jsonObject.getString("lastName") + "\nFamily: " + jsonObject.getString("family");
                     //dropdawn.setText(data);
                     txt.setText(data);
                 } catch (JSONException e) {

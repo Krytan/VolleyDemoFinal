@@ -30,11 +30,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private EditText Fruitname;
     private Button btn1;
     private Button btn2;
+    private Button btnCreate;
     private Spinner dropdawn;
     private TextView txt;
     private ArrayList<String> Fruitnames;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         dropdawn = findViewById(R.id.dropdown_menu);
         btn1 = findViewById(R.id.btn1);
         btn2 = findViewById(R.id.btn2);
+        btnCreate = findViewById(R.id.btncreate);
+
         txt = findViewById(R.id.normaltxt);
 
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         if(result.getResultCode() == AppConstants.RESULT_CODE_THIRD) {
                             //txt_msg.setText(result.getData().getStringExtra("msg"));
-                            Toast.makeText(MainActivity.this, "*******", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "*******", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -104,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener( v -> {
 
             DataService dataservice = new DataService(this);
-            dataservice.getAllFruits(new DataListener() {
+            dataservice.getAllperson(new DataListener() {
                 @Override
                 public void onDataReady(JSONArray jsonArray) {
                     for(int i = 0; i < jsonArray.length(); i++){
                         try {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String name = jsonObject.getString("name");
+                            String name = "ID: "+jsonObject.getString("persId") + "\n Name: " + jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
                             Fruitnames.add(name);
                             {
 
@@ -163,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataReady(JSONObject jsonObject) {
 
                     try {
-                        String data = jsonObject.getString("genus") + " " + jsonObject.getString("name");
+                        String data = jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
                         txt.setText(data);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -174,6 +177,13 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        btnCreate.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainActivity3.class);
+            launcher.launch(intent);
+        });
+
+
 
     }
+
 }

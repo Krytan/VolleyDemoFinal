@@ -17,17 +17,17 @@ import org.json.JSONObject;
 public class DataService {
 
     private Context ctx;
-    private static final String URL = "https://fruityvice.com/api/fruit/";
-    //private static final String URL2 = "https://reqres.in/api/users/";
+    private static final String URL = "http://10.0.2.2:8080/webapifinal_war/api/person";
+    //private static final String URL2 = "https://fruityvice.com/api/fruit/";
 
     public DataService(Context ctx) {
         this.ctx = ctx;
     }
 
-    public void getFruit(String fruitname, DataListener listener){
+    public void getFruit(String name, DataListener listener){
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                URL + fruitname,
+                URL + "/1",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -46,15 +46,17 @@ public class DataService {
         VolleySingleton.getInstance(ctx).getQueue().add(request);
 
     }
-/*
-    public void PostData(String Name, String Job, DataListener listener){
-        StringRequest request = new StringRequest(
+
+    public void Createperson(JSONObject json, DataListener listener){
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
-                URL2,
-                new Response.Listener<String>() {
+                URL,
+                json,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(JSONObject response) {
                         listener.onDataReady(response);
+                        Log.d("PSL_LOGdata",response.toString());
 
                     }
                 },
@@ -69,13 +71,13 @@ public class DataService {
 
     }
 
- */
 
-    public void getAllFruits(DataListener listener){
+
+    public void getAllperson(DataListener listener){
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                URL + "all",
+                URL,
                 null,
 
                 new Response.Listener<JSONArray>() {

@@ -39,23 +39,37 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="220dp"
         android:layout_marginTop="56dp"
-        android:text="fetch one"
+        android:text="fetch áll"
 
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Button>
 
     <Button
+        android:id="@+id/btncreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="260dp"
+        android:layout_marginTop="664dp"
+        android:text="Create USER"
+
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"></Button>
+
+    <Button
+
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="56dp"
-        android:text="fetch all"
+        android:text="fetch one"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Button>
 
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
