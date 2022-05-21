@@ -19,7 +19,7 @@ public class MainActivity3 extends AppCompatActivity {
 
     private EditText fName, lName;
     private CheckBox studentCheck;
-    private Button CreateBtn,btnBack2;
+    private Button CreateBtn, btnBack2;
     private TextView txtcreate;
 
 
@@ -39,48 +39,50 @@ public class MainActivity3 extends AppCompatActivity {
         DataService dataservice = new DataService(this);
         Intent intent = getIntent();
 
-        btnBack2.setOnClickListener(v ->{
+        btnBack2.setOnClickListener(v -> {
             setResult(AppConstants.RESULT_CODE_THIRD, intent);
             finish();
         });
 
         CreateBtn.setOnClickListener(v -> {
 
+            String Stringfname = fName.getText().toString();
+            String Stringlname = lName.getText().toString();
 
 
-            JSONObject json = new JSONObject();
-            try {
-                json.put("firstName", fName.getText().toString());
-                json.put("lastName", lName.getText().toString());
-                json.put("student", studentCheck.isChecked());
-
-                dataservice.Createperson(json, new DataListener() {
-                    @Override
-                    public void onDataReady(JSONArray jsonArray) {
+            if (Stringfname.matches("") || Stringlname.matches("")) {
+                Toast.makeText(MainActivity3.this, "You NEEED to type firstname and lastname", Toast.LENGTH_SHORT).show();
+            } else if (Stringfname.matches(".*[0-9].*") || Stringlname.matches(".*[0-9].*")) {
+                Toast.makeText(MainActivity3.this, "Invalid firstname or lastname no numbers allowed", Toast.LENGTH_SHORT).show();
+            } else {
 
 
-                    }
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("firstName", fName.getText().toString());
+                    json.put("lastName", lName.getText().toString());
+                    json.put("student", studentCheck.isChecked());
 
-                    @Override
-                    public void onDataError(String err) {
-                        Toast.makeText(MainActivity3.this, "Error:  " + err, Toast.LENGTH_SHORT).show();
-                    }
+                    dataservice.Createperson(json, new DataListener() {
+                        @Override
+                        public void onDataReady(JSONArray jsonArray) {
 
-                    @Override
-                    public void onDataReady(String string) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onDataReady(JSONObject jsonObject) {
+                        @Override
+                        public void onDataError(String err) {
+                            Toast.makeText(MainActivity3.this, "Error:  " + err, Toast.LENGTH_SHORT).show();
+                        }
 
-                        String Stringfname = fName.getText().toString();
-                        String Stringlname = lName.getText().toString();
-                        String name = null;
+                        @Override
+                        public void onDataReady(String string) {
 
-                        if (Stringfname.matches("") || Stringlname.matches("")) {
-                            Toast.makeText(MainActivity3.this, "You NEEED to type firstname and lastname", Toast.LENGTH_SHORT).show();
-                        } else {
+                        }
+
+                        @Override
+                        public void onDataReady(JSONObject jsonObject) {
+                            String name = null;
 
                             try {
 
@@ -95,17 +97,17 @@ public class MainActivity3 extends AppCompatActivity {
                             lName.getText().clear();
                             studentCheck.setChecked(false);
                             //recreate();
-                            Toast.makeText(MainActivity3.this, "Person: " + name +" Created", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity3.this, "Person: " + name + " Created", Toast.LENGTH_SHORT).show();
+
                         }
-                    }
-                });
-            } catch (JSONException e) {
-                Log.d("Err_LOG", e.getMessage());
+
+                    });
+
+                } catch (JSONException e) {
+                    Log.d("Err_LOG", e.getMessage());
+                }
+
             }
-
-
-
-
         });
 
 

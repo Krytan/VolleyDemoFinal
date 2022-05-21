@@ -18,8 +18,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
+        android:backgroundTint="@color/darkBlue"
         android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_height="480dp"
         app:cardElevation="10dp"
         app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
@@ -32,14 +33,80 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
+
+        <EditText
+            android:id="@+id/editfirstname"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="80dp">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/editlastname"
+            android:layout_width="250dp"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:layout_height="40dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="130dp">
+
+        </EditText>
+
+        <CheckBox
+            android:textStyle="bold"
+            android:id="@+id/studentbox"
+            android:textColor="@color/darkred"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:layout_marginBottom="5dp"
+            android:text="Student" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="80dp"
+            android:text="Firstname:"
+            android:textColor="@color/darkred"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="130dp"
+            android:text="Lastname:"
+            android:textColor="@color/darkred"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lastupdated"
+            android:layout_width="332dp"
+            android:layout_height="154dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="250dp"
+            android:text="Last updated:"
+            android:textColor="@color/darkred"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/txt1"
             android:layout_width="332dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="name:"
+            android:text="Person information"
+            android:textColor="@color/darkred"
             android:textSize="20sp"
             android:textStyle="bold"/>
 

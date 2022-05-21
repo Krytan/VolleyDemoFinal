@@ -30,6 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity  {
 
     private EditText Fruitname;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Fruitnames = new ArrayList<>();
         Fruitname = findViewById(R.id.fruitname);
         dropdawn = findViewById(R.id.dropdown_menu);
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity  {
         txt = findViewById(R.id.normaltxt);
 
 
+        onLoad();
         launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity  {
                             Intent intent = result.getData();
                             //txt_msg.setText(intent.getStringExtra("msg"));
                             Toast.makeText(MainActivity.this, intent.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
+                            onLoad();
                             return;
                         }
                         if(result.getResultCode() == AppConstants.RESULT_CODE_THIRD) {
@@ -83,12 +87,16 @@ public class MainActivity extends AppCompatActivity  {
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    String name = dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
-                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                    intent.putExtra("fromMain", name);
-                    launcher.launch(intent);
-                    //Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
 
+                    String name = dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
+                    if (name == "Choose a person")
+                    {}else {
+
+                        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                        intent.putExtra("fromMain", name);
+                        launcher.launch(intent);
+                        //Toast.makeText(getApplicationContext(),name,Toast.LENGTH_LONG).show();
+                    }
 
 
             }
@@ -101,62 +109,15 @@ public class MainActivity extends AppCompatActivity  {
         });
 
 
-        btn1.setOnClickListener( v -> {
 
 
 
-            DataService dataservice = new DataService(this);
-            dataservice.getAllperson(new DataListener() {
-                @Override
-                public void onDataReady(JSONArray jsonArray) {
-                    for(int i = 0; i < jsonArray.length(); i++){
-                        try {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            String name = "ID: "+jsonObject.getString("persId") + "\n Name: " + jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
-
-                            Fruitnames.add(name);
-                            {
-
-                            }
-
-
-
-                            dropdawn.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, Fruitnames));
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                }
-
-                @Override
-                public void onDataError(String err) {
-
-                }
-
-                @Override
-                public void onDataReady(String string) {
-
-                }
-
-
-                @Override
-                public void onDataReady(JSONObject jsonObject) {
-
-                }
-            });
-            CheckFirstTime = false;
-
-        });
-
-
-
+        /* GET A USER BY TYPING A TEXT
         btn2.setOnClickListener( v->{
 
             String fruitName = Fruitname.getText().toString();
             DataService dataService = new DataService(this);
-            dataService.getFruit(fruitName, new DataListener() {
+            dataService.getPerson(id, new DataListener() {
                 @Override
                 public void onDataReady(JSONArray jsonArray) {
 
@@ -187,6 +148,7 @@ public class MainActivity extends AppCompatActivity  {
 
         });
 
+         */
         btnCreate.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, MainActivity3.class);
             launcher.launch(intent);
@@ -196,4 +158,61 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+    public void onLoad() {
+
+
+        DataService dataservice = new DataService(this);
+        dataservice.getAllperson(new DataListener() {
+            @Override
+            public void onDataReady(JSONArray jsonArray) {
+                Fruitnames.clear();
+                Fruitnames.add("Choose a person");
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    try {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String name = "ID: " + jsonObject.getString("persId") + "\n Name: " + jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
+
+
+
+                        Fruitnames.add(name);
+                        {
+
+                        }
+
+
+
+                        dropdawn.setAdapter(new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, Fruitnames));
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onDataError(String err) {
+
+            }
+
+            @Override
+            public void onDataReady(String string) {
+
+            }
+
+
+            @Override
+            public void onDataReady(JSONObject jsonObject) {
+
+            }
+        });
+
+    }
+
 }
+

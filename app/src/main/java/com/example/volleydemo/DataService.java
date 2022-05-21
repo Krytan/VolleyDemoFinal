@@ -23,10 +23,10 @@ public class DataService {
         this.ctx = ctx;
     }
 
-    public void getFruit(String name, DataListener listener){
+    public void getPerson(int id, DataListener listener){
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                URL + "/1",
+                URL +"/"+ id,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -120,6 +120,33 @@ public class DataService {
 
         );
        VolleySingleton.getInstance(ctx).getQueue().add(request);
+    }
+
+    public void updatedPerson(int id ,JSONObject json,DataListener listener){
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.PUT,
+                URL + "/" +id,
+                json,
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        listener.onDataReady(response);
+                        Log.d("PSL_LOGdata",response.toString());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onDataError(error.getMessage());
+                        Log.d("PSL_LOGerr",error.toString());
+                    }
+                }
+
+        );
+        VolleySingleton.getInstance(ctx).getQueue().add(request);
     }
 
 }
