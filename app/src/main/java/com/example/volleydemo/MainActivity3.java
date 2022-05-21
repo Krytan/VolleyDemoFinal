@@ -67,6 +67,11 @@ public class MainActivity3 extends AppCompatActivity {
                     }
 
                     @Override
+                    public void onDataReady(String string) {
+
+                    }
+
+                    @Override
                     public void onDataReady(JSONObject jsonObject) {
 
                         String Stringfname = fName.getText().toString();

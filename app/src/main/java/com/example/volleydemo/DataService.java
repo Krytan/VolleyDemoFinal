@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -55,6 +54,29 @@ public class DataService {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        listener.onDataReady(response);
+                        Log.d("PSL_LOGdata",response.toString());
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onDataError(error.getMessage());
+                    }
+                }
+        );
+        VolleySingleton.getInstance(ctx).getQueue().add(request);
+
+    }
+
+    public void deletePerson(int id, DataListener listener){
+        StringRequest request = new StringRequest(
+                Request.Method.DELETE,
+                URL + "/"+ id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
                         listener.onDataReady(response);
                         Log.d("PSL_LOGdata",response.toString());
 

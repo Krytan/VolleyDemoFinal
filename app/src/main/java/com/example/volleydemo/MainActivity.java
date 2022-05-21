@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity  {
     private ArrayList<String> Fruitnames;
     private ActivityResultLauncher<Intent> launcher;
     boolean CheckFirstTime = true;
-    private int test = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +83,6 @@ public class MainActivity extends AppCompatActivity  {
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                     String name = dropdawn.getItemAtPosition(dropdawn.getSelectedItemPosition()).toString();
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     intent.putExtra("fromMain", name);
@@ -106,6 +103,8 @@ public class MainActivity extends AppCompatActivity  {
 
         btn1.setOnClickListener( v -> {
 
+
+
             DataService dataservice = new DataService(this);
             dataservice.getAllperson(new DataListener() {
                 @Override
@@ -114,6 +113,7 @@ public class MainActivity extends AppCompatActivity  {
                         try {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String name = "ID: "+jsonObject.getString("persId") + "\n Name: " + jsonObject.getString("firstName") + " " + jsonObject.getString("lastName");
+
                             Fruitnames.add(name);
                             {
 
@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity  {
 
                 @Override
                 public void onDataError(String err) {
+
+                }
+
+                @Override
+                public void onDataReady(String string) {
 
                 }
 
@@ -159,6 +164,11 @@ public class MainActivity extends AppCompatActivity  {
 
                 @Override
                 public void onDataError(String err) {
+
+                }
+
+                @Override
+                public void onDataReady(String string) {
 
                 }
 
