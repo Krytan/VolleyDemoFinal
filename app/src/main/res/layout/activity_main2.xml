@@ -8,6 +8,7 @@
     tools:context=".MainActivity2">
 
     <Button
+        android:backgroundTint="@color/darkred"
         android:id="@+id/btnback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -113,6 +114,7 @@
         </androidx.cardview.widget.CardView>
 
     <Button
+        android:backgroundTint="@color/darkred"
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,6 +126,7 @@
 
 
     <Button
+        android:backgroundTint="@color/darkred"
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

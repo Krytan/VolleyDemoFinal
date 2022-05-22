@@ -8,6 +8,7 @@
     tools:context=".MainActivity3">
 
     <Button
+        android:backgroundTint="@color/darkred"
         android:id="@+id/btnBack2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +26,7 @@
         app:cardElevation="10dp"
         app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/darkBlue"
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
@@ -35,6 +36,8 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <EditText
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:id="@+id/firstNamebtn"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
@@ -46,6 +49,8 @@
             app:layout_constraintVertical_bias="0.373" />
 
         <EditText
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
             android:id="@+id/lastNamebtn"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
@@ -55,6 +60,7 @@
             android:minHeight="48dp" />
 
         <CheckBox
+            android:textColor="@color/darkred"
             android:id="@+id/studentbtn"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
@@ -63,6 +69,7 @@
             android:layout_gravity="center" />
 
         <Button
+            android:backgroundTint="@color/darkred"
             android:id="@+id/createbtn"
             android:layout_width="260dp"
             android:layout_height="wrap_content"

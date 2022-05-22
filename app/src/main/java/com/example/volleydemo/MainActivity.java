@@ -67,13 +67,14 @@ public class MainActivity extends AppCompatActivity  {
                         if(result.getResultCode() == AppConstants.RESULT_CODE_SECOND) {
                             Intent intent = result.getData();
                             //txt_msg.setText(intent.getStringExtra("msg"));
-                            Toast.makeText(MainActivity.this, intent.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, intent.getStringExtra("msg"), Toast.LENGTH_SHORT).show();
                             onLoad();
                             return;
                         }
                         if(result.getResultCode() == AppConstants.RESULT_CODE_THIRD) {
                             //txt_msg.setText(result.getData().getStringExtra("msg"));
                             //Toast.makeText(MainActivity.this, "*******", Toast.LENGTH_SHORT).show();
+                            onLoad();
                             return;
                         }
                     }

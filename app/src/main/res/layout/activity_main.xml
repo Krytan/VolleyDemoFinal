@@ -40,8 +40,7 @@
         android:layout_marginLeft="220dp"
         android:layout_marginTop="56dp"
         android:text="fetch áll"
-
-
+        android:backgroundTint="@color/darkred"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"></Button>
 
@@ -52,7 +51,7 @@
         android:layout_marginLeft="260dp"
         android:layout_marginTop="664dp"
         android:text="Create USER"
-
+        android:backgroundTint="@color/darkred"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"></Button>
@@ -60,6 +59,7 @@
     <Button
 
         android:id="@+id/btn2"
+        android:backgroundTint="@color/darkred"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -87,9 +87,11 @@
             android:layout_marginTop="50dp"
             android:layout_marginRight="25dp"
             android:background="@drawable/spinner"
-            android:spinnerMode="dropdown"
+            android:backgroundTint="@color/darkred"
 
-            >
+
+            android:foregroundTint="#FFFFFF"
+            android:spinnerMode="dropdown">
 
         </Spinner>
 
